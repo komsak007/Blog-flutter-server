@@ -11,13 +11,28 @@ router.get("/:username", middleware.checkToken, (req, res) => {
     if (err) return res.status(500).json({ msg: err });
 
     res.json({
-      data: req.decoded,
+      data: result,
       username: req.params.username,
     });
   });
 });
 
-router.post("/login", middleware.checkToken, (req, res) => {
+router.get("/checkusername/:username", (req, res) => {
+  User.findOne({ username: req.params.username }, (err, result) => {
+    if (err) return res.status(500).json({ msg: err });
+    if (result !== null) {
+      return res.json({
+        Status: true,
+      });
+    } else {
+      return res.json({
+        Status: false,
+      });
+    }
+  });
+});
+
+router.post("/login", (req, res) => {
   User.findOne({ username: req.body.username }, (err, result) => {
     if (err) return res.status(500).json({ msg: err });
     if (result === null) {
