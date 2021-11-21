@@ -23,6 +23,11 @@ app.use("/user", userRoute);
 const profileRoute = require("./routes/profile");
 app.use("/profile", profileRoute);
 
+const blogRoute = require("./routes/blogpost");
+app.use("/blogPost", blogRoute);
+
 app.route("/").get((req, res) => res.json({ rest: "your first rest api 11" }));
 
-app.listen(Port, () => console.log(`Your server in running on port ${Port}`));
+app.listen(Port, "0.0.0.0", () =>
+  console.log(`Your server in running on port ${Port}`)
+);
