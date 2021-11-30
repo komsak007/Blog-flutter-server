@@ -74,7 +74,7 @@ router.post("/register", (req, res) => {
 
 // Update User
 
-router.patch("/update/:username", middleware.checkToken, (req, res) => {
+router.patch("/update/:username", (req, res) => {
   User.findOneAndUpdate(
     { username: req.params.username },
     { $set: { password: req.body.password } },

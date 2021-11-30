@@ -49,7 +49,7 @@ router.post("/Add", middleWare.checkToken, (req, res) => {
   blogpost
     .save()
     .then((result) => {
-      res.json({ data: result });
+      res.json({ data: result["_id"] });
     })
     .catch((err) => {
       res.json({ err: err });
